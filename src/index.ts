@@ -1,0 +1,3 @@
+function study(title: string) {
+
+}
