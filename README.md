@@ -81,10 +81,96 @@ Current list of overloaded operators:
 | a[b]      | a.getAt(b)     |
 
 </details>
+<br>
 
-# Documentation
+When writing helper functions that operate on series, you can return lambda function that takes index and use it to get value from input series. This is a slight distinction from PineScript™[^1], here in PieScript you "run" series and get its value at index, by using `x()` and not `x[]`.
 
-TODO
+```typescript
+math.sum =
+  (x: series<number>, length: series<number>): series<number> =>
+    i => {
+      const L = length(i)
+      let sum = 0
+      for (let j = 0; j < L; ++j)
+        sum += x(i + j)
+      return sum
+    }
+```
+
+# Roadmap
+
+- [x] color
+- [x] math
+- [ ] input
+- [ ] plot
+- [ ] ta
+  - [x] sma
+  - [x] ema
+  - [x] range
+  - [x] alma
+  - [ ] bb
+  - [ ] kc
+  - [ ] tr
+  - [ ] atr
+  - [ ] bbw
+  - [ ] cci
+  - [ ] cmo
+  - [ ] cog
+  - [ ] cum
+  - [ ] dev
+  - [ ] dmi
+  - [ ] ema
+  - [ ] hma
+  - [ ] kcw
+  - [ ] max
+  - [ ] mfi
+  - [ ] min
+  - [ ] mom
+  - [ ] rci
+  - [ ] rma
+  - [ ] roc
+  - [ ] rsi
+  - [ ] sar
+  - [ ] sma
+  - [ ] tsi
+  - [ ] wma
+  - [ ] wpr
+  - [ ] iii
+  - [ ] nvi
+  - [ ] pvi
+  - [ ] pvt
+  - [ ] wad
+  - [ ] macd
+  - [ ] mode
+  - [ ] vwap
+  - [ ] vwma
+  - [ ] stdev
+  - [ ] mode
+  - [ ] cross
+  - [ ] stoch
+  - [ ] lowest
+  - [ ] median
+  - [ ] linreg
+  - [ ] rising
+  - [ ] change
+  - [ ] falling
+  - [ ] accdist
+  - [ ] highest
+  - [ ] variance
+  - [ ] pivotlow
+  - [ ] barssince
+  - [ ] valuewhen
+  - [ ] crossover
+  - [ ] pivothigh
+  - [ ] crossunder
+  - [ ] lowestbars
+  - [ ] supertrend
+  - [ ] highestbars
+  - [ ] correlation
+  - [ ] percentrank
+  - [ ] pivot_point_levels
+  - [ ] percentile_nearest_rank
+  - [ ] percentile_linear_interpolation
 
 # License
 
