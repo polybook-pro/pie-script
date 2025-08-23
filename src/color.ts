@@ -22,23 +22,26 @@ class color {
     public r: number,
     public g: number,
     public b: number,
-    public alpha = 100
+    public a = 100
   ) {}
 
-  static new = supportConst(
-    (c: S<color>, alpha: S<number>) =>
-      i => {
-        const ci = c(i)
-        if (na(ci))
-          return null
-        return new color(ci.r, ci.g, ci.b, alpha(i))
-      }
-  )
+  static new = (
+    other: series<color>,
+    alpha: series<number>
+  ): series<color> =>
+    i => {
+      const ci = other(i)
+      return new color(ci.r, ci.g, ci.b, alpha(i))
+    }
 
-  static rgb = supportConst(
-    (r: S<number>, g: S<number>, b: S<number>, alpha: S<number>): S<color> =>
+  static rgb =
+    (
+      r: series<number>,
+      g: series<number>,
+      b: series<number>,
+      alpha: series<number> = () => 100
+    ): series<color> =>
       i => new color(r(i), g(i), b(i), alpha(i))
-  )
 
   static hex(arg: string | TemplateStringsArray) {
     let str = (typeof arg === 'string' ? arg : arg[0]).trim()
@@ -56,37 +59,32 @@ class color {
     )
   }
 
-  static r = supportConst(
-    (c: S<color>): S<number> =>
+  static r =
+    (c: series<color>): series<number> =>
       i => c(i).r
-  )
-  static g = supportConst(
-    (c: S<color>): S<number> =>
+  static g = 
+    (c: series<color>): series<number> =>
       i => c(i).g
-  )
-  static b = supportConst(
-    (c: S<color>): S<number> =>
+  static b = 
+    (c: series<color>): series<number> =>
       i => c(i).b
-  )
-  static a = supportConst(
-    (c: S<color>): S<number> =>
-      i => c(i).alpha
-  )
+  static a = 
+    (c: series<color>): series<number> =>
+      i => c(i).a
   static alpha = color.a
   static t = color.a
 
-  static lerp = supportConst(
-    (a: S<color>, b: S<color>, t: S<number>) => 
+  static lerp =
+    (a: series<color>, b: series<color>, t: series<number>): series<color> => 
       color.rgb(
         math.lerp(color.r(a), color.r(b), t),
         math.lerp(color.g(a), color.g(b), t),
         math.lerp(color.b(a), color.b(b), t),
         math.lerp(color.a(a), color.a(b), t)
       )
-  )
   static mix = color.lerp
 
-  static from_gradient = supportConst(
+  static from_gradient =
     (
       value: series<number>,
       
@@ -101,15 +99,11 @@ class color {
         top_color,
         math.ilerp(value, bottom_value, top_value)
       )
-  )
 
-  fade(alpha = 100) {
-    return color.new(this, this.alpha * (alpha / 100))
-  }
+  fade = (alpha = 100) =>
+    color.new(this, (alpha / 100) * this.a)
 
-  static fade = supportConst(
-    (c: S<color>, alpha: S<number>): S<color> =>
-      color.new(c, color.a(c) * (alpha / 100))
-  )
- 
+  static fade =
+    (c: series<color>, alpha: series<number>): series<color> =>
+      color.new(c, (alpha / 100) * color.a(c))
 }

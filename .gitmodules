@@ -1,0 +1,3 @@
+[submodule "TypeScript"]
+	path = TypeScript
+	url = git@github.com:polybook-pro/TypeScript.git

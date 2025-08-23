@@ -1,0 +1,20 @@
+{
+  "tsconfig": "tsconfig.docs.json",
+  "entryPoints": [ "dist/piescript.d.ts" ],
+  "entryPointStrategy": "expand",
+  "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+  "out": "docs/api",
+  "readme": "none",
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "disableSources": true,
+
+  "router": "module",
+  "flattenOutputFiles": true//,
+
+  // "enableLongTitles": true,
+  // "pageTitleTemplates": {
+    // "member": "`{rawName}`"   // renders as `math.floor`, `math.round`, etc.
+  // }
+}
