@@ -1,62 +1,47 @@
-class ta {
-  
-  static sum = supportConst(
-    (source: S<number>, length: S<number>) =>
-      i => {
-        const L = length(i)
-        let sum = 0
-        for (let j = 0; j < L; ++j)
-          sum += source(i + j)
-        return sum
-      }
-  )
+export class ta {
 
-  static sma = supportConst(
-    (source: S<number>, length: S<number>) =>
-      ta.sum(source, length) / length
-  )
+  static sma =
+    (source: series<number>, length: series<number>): series<number> =>
+      math.sum(source, length) / length
 
-  static ema = supportConst(
-    (source: S<number>, length: S<number>) =>
+  static ema =
+    (source: series<number>, length: series<number>): series<number> =>
       i => {
         const L = Math.max(1, Math.floor(length(i)))
         const alpha = 2 / (L + 1)
         const x = source(i)
         if (i <= 0) {
-          return x // seed at first bar
+          return x
         }
         const prev = ta.ema(source, length)(i - 1)
         if (prev == null) return x
         return alpha * x + (1 - alpha) * prev
       }
-  )
 
-  static alma = supportConst(
-    (
-      series: S<number>,
-      length: S<number>,
-      offset: S<number>,
-      sigma:  S<number>,
-      floor:  S<number>
-    ) : S<number> => 
-      i => {
-        const L = Math.max(1, Math.floor(length(i)))
-        const mRaw = offset(i) * (L - 1);
-        const m = floor(i) ? Math.floor(mRaw) : mRaw
-        const s = L / sigma(i)
-        let norm = 0
-        let sum = 0
-        for (let j = 0; j <= L - 1; ++j) {
-          const weight = Math.exp(-1 * Math.pow(j - m, 2) / (2 * Math.pow(s, 2)))
-          norm += weight
-          sum += series(i + L - j - 1) * weight
-        }
-        return sum / norm
+  static alma = (
+    series: series<number>,
+    length: series<number>,
+    offset: series<number>,
+    sigma:  series<number>,
+    floor:  series<number>
+  ): series<number> => 
+    i => {
+      const L = Math.max(1, Math.floor(length(i)))
+      const mRaw = offset(i) * (L - 1);
+      const m = floor(i) ? Math.floor(mRaw) : mRaw
+      const s = L / sigma(i)
+      let norm = 0
+      let sum = 0
+      for (let j = 0; j <= L - 1; ++j) {
+        const weight = Math.exp(-1 * Math.pow(j - m, 2) / (2 * Math.pow(s, 2)))
+        norm += weight
+        sum += series(i + L - j - 1) * weight
       }
-  )
+      return sum / norm
+    }
 
-  static range = supportConst(
-    (source: S<number>, length: S<number>) =>
+  static range =
+    (source: series<number>, length: series<number>): series<number | null> =>
       i => {
         const L = length(i)
         let mn = Infinity
@@ -71,7 +56,6 @@ class ta {
         }
         return seen ? (mx - mn) : null
       }
-  )
 
   // TODO:
 

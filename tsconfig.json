@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "none",
+    "lib": ["ES2020"],
+    "strict": true,
+    "skipLibCheck": true,
+    "outFile": "dist/piescript.js",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noEmitOnError": false
+  },
+  "files": [
+    "src/series.ts",
+    "src/math.ts",
+    "src/color.ts",
+    "src/ta.ts",
+    "src/input.ts",
+    "src/index.ts"
+  ]
+}

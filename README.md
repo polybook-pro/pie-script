@@ -37,7 +37,10 @@ const shifted = index[4]
 const result = plus_two / div_two * shifted
 ```
 
-### How does it work in TypeScript?
+<details>
+<summary>
+How does it work in TypeScript?
+</summary>
 
 As written earlier, PieScript is TypeScript fork with one feature on top — operator overloading.
 
@@ -50,11 +53,11 @@ Here is an example implementation of `plus` in functions:
 ```typescript
 declare global {
     declare interface Function {
-        plus<T>(value: T | Series<T>): Series<T>
+        plus<T>(value: T | series<T>): series<T>
     }
 }
 
-Function.prototype.plus = function<T> (this: Function, value: T | Series<T>): Series<T> => {
+Function.prototype.plus = function<T> (this: series<T>, value: T | series<T>): series<T> => {
     if (typeof value === 'function')
         return index => this(index) + value(index)
     else
@@ -75,7 +78,9 @@ Current list of overloaded operators:
 | a / b     | a.div(b)       |
 | -a        | a.unaryMinus() |
 | +a        | a.unaryPlus()  |
+| a[b]      | a.getAt(b)     |
 
+</details>
 
 # Documentation
 
