@@ -74,11 +74,15 @@ Current list of overloaded operators:
 |-----------|----------------|
 | a + b     | a.plus(b)      |
 | a - b     | a.minus(b)     |
+| b - a     | a.minusInv(b)  |
 | a * b     | a.times(b)     |
 | a / b     | a.div(b)       |
+| b / a     | a.divInv(b)    |
 | -a        | a.unaryMinus() |
 | +a        | a.unaryPlus()  |
 | a[b]      | a.getAt(b)     |
+
+`minusInv` and `divInv` apply when non-inverted respective functions couldn't be applied, usually because left operand doesn't have non-inverted function.
 
 </details>
 <br>
@@ -108,64 +112,64 @@ math.sum =
   - [x] ema
   - [x] range
   - [x] alma
-  - [ ] bb
-  - [ ] kc
-  - [ ] tr
-  - [ ] atr
-  - [ ] bbw
-  - [ ] cci
-  - [ ] cmo
-  - [ ] cog
-  - [ ] cum
-  - [ ] dev
-  - [ ] dmi
-  - [ ] ema
-  - [ ] hma
-  - [ ] kcw
-  - [ ] max
-  - [ ] mfi
-  - [ ] min
-  - [ ] mom
-  - [ ] rci
-  - [ ] rma
-  - [ ] roc
+  - [x] bb
+  - [x] kc
+  - [x] tr
+  - [x] atr
+  - [x] bbw
+  - [x] cci
+  - [x] cmo
+  - [x] cog
+  - [x] cum
+  - [x] dev
+  - [x] dmi
+  - [x] ema
+  - [x] hma
+  - [x] kcw
+  - [x] max
+  - [x] mfi
+  - [x] min
+  - [x] mom
+  - [x] rci
+  - [x] rma
+  - [x] roc
   - [ ] rsi
-  - [ ] sar
-  - [ ] sma
-  - [ ] tsi
-  - [ ] wma
+  - [x] sar
+  - [x] sma
+  - [x] tsi
+  - [x] wma
   - [ ] wpr
-  - [ ] iii
-  - [ ] nvi
-  - [ ] pvi
-  - [ ] pvt
-  - [ ] wad
-  - [ ] macd
-  - [ ] mode
+  - [x] iii
+  - [x] nvi
+  - [x] pvi
+  - [x] pvt
+  - [x] wad
+  - [x] macd
+  - [x] mode
   - [ ] vwap
   - [ ] vwma
-  - [ ] stdev
+  - [x] stdev
   - [ ] mode
-  - [ ] cross
-  - [ ] stoch
-  - [ ] lowest
-  - [ ] median
+  - [x] cross
+  - [x] stoch
+  - [x] lowest
+  - [x] median
   - [ ] linreg
-  - [ ] rising
-  - [ ] change
-  - [ ] falling
-  - [ ] accdist
-  - [ ] highest
+  - [x] rising
+  - [x] change
+  - [x] falling
+  - [x] accdist
+  - [x] highest
   - [ ] variance
   - [ ] pivotlow
-  - [ ] barssince
-  - [ ] valuewhen
+  - [x] barssince
+  - [x] valuewhen
   - [ ] crossover
   - [ ] pivothigh
   - [ ] crossunder
-  - [ ] lowestbars
+  - [x] lowestbars
   - [ ] supertrend
-  - [ ] highestbars
+  - [x] highestbars
   - [ ] correlation
   - [ ] percentrank
   - [ ] pivot_point_levels
